@@ -485,13 +485,14 @@ select.form-control { cursor: pointer; }
           <span style="font-size:.7rem;color:var(--text-secondary);">GitHub → Settings → Developer settings → Personal access tokens. Necesita permisos de "repo".</span>
         </div>
         <div class="form-group">
-          <label class="form-label">Repositorio (usuario/repo)</label>
-          <input type="text" class="form-control" id="gh_repo" placeholder="usuario/mi-base-datos">
+          <label class="form-label">Repositorio</label>
+          <input type="text" class="form-control" id="gh_repo" placeholder="usuario/nombre-repositorio">
+          <span style="font-size:.7rem;color:var(--text-secondary);">Solo <strong>usuario/repo</strong>, ej: <code style="background:#eee;padding:1px 4px;border-radius:3px;">user-app-studio/user-app-studio.github.io</code></span>
         </div>
         <div class="form-group">
-          <label class="form-label">Nombre del archivo JSON de datos</label>
+          <label class="form-label">Ruta del archivo JSON</label>
           <input type="text" class="form-control" id="gh_filename" value="jam_alumnos.json">
-          <span style="font-size:.7rem;color:var(--text-secondary);">Se usará JSON para sincronización (más eficiente). El Excel es solo para backup local.</span>
+          <span style="font-size:.7rem;color:var(--text-secondary);">Si está en carpeta: <code style="background:#eee;padding:1px 4px;border-radius:3px;">bbdd_alumnos/jam_alumnos.json</code></span>
         </div>
         <div class="form-group">
           <label class="form-label">Rama</label>
