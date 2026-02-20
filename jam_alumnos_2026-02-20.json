@@ -1,0 +1,24 @@
+[
+  {
+    "id": "mlu4n8xfbm5zrn",
+    "nombre": "Jorge López",
+    "telefono": "344 444 555",
+    "correo": "jorge@gmail.com",
+    "direccion": "Las rozas",
+    "sexo": "Masculino",
+    "edad": 14,
+    "dias": [],
+    "duracion": "1h",
+    "tematica": "Office e introduccion al pc",
+    "sabe": "Es muy novato",
+    "nosabe": "Excel y word",
+    "necesidades": "Seguir aprendiendo cosas básicas",
+    "personalidad": "Amigable",
+    "sugerencias": "Prácticas con office",
+    "aconsejable": "En evaluación",
+    "pago": "Sí",
+    "notas": "Es muy joven, necesita ayuda",
+    "fechaRegistro": "2026-02-20T00:03:47.571Z",
+    "ultimaActualizacion": "2026-02-20T00:03:47.571Z"
+  }
+]
