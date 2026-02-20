@@ -678,9 +678,11 @@ async function pullFromGitHub(silent = false) {
     }
 
     if (!response.ok) {
-      const err = await response.json();
-      setSyncStatus('error', 'Error al cargar');
-      if (!silent) notify('Error GitHub: ' + (err.message || 'No se pudo cargar'), 'error');
+      let errMsg = response.status + ' ' + response.statusText;
+      try { const err = await response.json(); errMsg += ': ' + (err.message || ''); } catch(e) {}
+      setSyncStatus('error', 'Error ' + response.status);
+      notify('GitHub ' + errMsg + ' | URL: ' + apiBase, 'error');
+      console.error('GitHub error:', response.status, apiBase);
       return;
     }
 
@@ -700,7 +702,7 @@ async function pullFromGitHub(silent = false) {
 
   } catch(e) {
     setSyncStatus('error', 'Error de sync');
-    if (!silent) notify('Error al cargar desde GitHub', 'error');
+    if (!silent) notify('Error: ' + (e.message || String(e)), 'error');
     console.error(e);
   }
 }
