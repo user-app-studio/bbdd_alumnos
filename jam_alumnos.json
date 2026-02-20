@@ -335,9 +335,13 @@
     "direccion": "Calle del suspiro verde 33, 25443, Zamora",
     "sexo": "Masculino",
     "edad": 33,
-    "fechaUltimaClase": "2026-02-05",
+    "fechaUltimaClase": "2026-02-06",
     "duracion": "30min",
     "historialClases": [
+      {
+        "fecha": "2026-02-06",
+        "duracion": "30min"
+      },
       {
         "fecha": "2026-02-05",
         "duracion": "30min"
@@ -353,6 +357,6 @@
     "pago": "Sí",
     "notas": "Acabo de conocerlo.",
     "fechaRegistro": "2026-02-20T12:41:54.414Z",
-    "ultimaActualizacion": "2026-02-20T12:41:54.414Z"
+    "ultimaActualizacion": "2026-02-20T12:45:57.179Z"
   }
 ]
