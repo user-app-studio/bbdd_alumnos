@@ -326,5 +326,33 @@
     "notas": "Mal rollito que da el tío",
     "fechaRegistro": "2026-02-20T08:58:21.524Z",
     "ultimaActualizacion": "2026-02-20T11:02:26.601Z"
+  },
+  {
+    "id": "mluvq6suj47vx9",
+    "nombre": "Austregisilio López de la Serna",
+    "telefono": "888 999 000",
+    "correo": "aus@gmail.com",
+    "direccion": "Calle del suspiro verde 33, 25443, Zamora",
+    "sexo": "Masculino",
+    "edad": 33,
+    "fechaUltimaClase": "2026-02-05",
+    "duracion": "30min",
+    "historialClases": [
+      {
+        "fecha": "2026-02-05",
+        "duracion": "30min"
+      }
+    ],
+    "tematica": "Office",
+    "sabe": "Poca cosa",
+    "nosabe": "Casi nada",
+    "necesidades": "Paciencia infinita",
+    "personalidad": "Nervioso",
+    "sugerencias": "Psicólogo urgente",
+    "aconsejable": "En evaluación",
+    "pago": "Sí",
+    "notas": "Acabo de conocerlo.",
+    "fechaRegistro": "2026-02-20T12:41:54.414Z",
+    "ultimaActualizacion": "2026-02-20T12:41:54.414Z"
   }
 ]
