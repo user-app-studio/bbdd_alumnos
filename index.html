@@ -650,7 +650,7 @@ select.form-control { cursor: pointer; }
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importDatabase(event)">
     <input type="file" id="importExcelFile" accept=".xlsx,.xls" style="display:none" onchange="importFromExcel(event)">
   </nav>
-  <div class="sidebar-footer"> JLMF12 & JAM STUDIO &copy; 2026</div>
+  <div class="sidebar-footer">JAM Informática &copy; 2025</div>
 </aside>
 
 <!-- Main Content -->
@@ -824,7 +824,7 @@ select.form-control { cursor: pointer; }
 </div>
 
 <!-- GitHub Config Modal -->
-<div class="modal-overlay" id="githubOverlay">
+<div class="modal-overlay" id="githubOverlay" onclick="if(event.target===this)closeGitHub()">
   <div class="modal" style="max-width:520px;">
     <div class="modal-header">
       <h2>Configurar GitHub</h2>
@@ -851,12 +851,18 @@ select.form-control { cursor: pointer; }
           <label class="form-label">Rama</label>
           <input type="text" class="form-control" id="gh_branch" value="main">
         </div>
-        <div class="form-actions" style="border-top:none;margin-top:0;padding-top:0;">
-          <button class="btn btn-secondary" onclick="closeGitHub()">Cancelar</button>
-          <button class="btn btn-primary" onclick="saveGitHubConfig()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
-            Guardar
+        <div class="form-actions" style="border-top:none;margin-top:0;padding-top:0;justify-content:space-between;">
+          <button class="btn btn-danger btn-sm" onclick="clearGitHubConfig()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Borrar config
           </button>
+          <div style="display:flex;gap:10px;">
+            <button class="btn btn-secondary" onclick="closeGitHub()">Cancelar</button>
+            <button class="btn btn-primary" onclick="saveGitHubConfig()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+              Guardar
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1724,6 +1730,15 @@ function saveGitHubConfig() {
   notify('Configuración de GitHub guardada');
 }
 
+function clearGitHubConfig() {
+  localStorage.removeItem(GH_CONFIG_KEY);
+  document.getElementById('gh_token').value = '';
+  document.getElementById('gh_repo').value = '';
+  document.getElementById('gh_filename').value = 'jam_alumnos.xlsx';
+  document.getElementById('gh_branch').value = 'main';
+  notify('Configuración de GitHub eliminada');
+}
+
 async function pushToGitHub() {
   const cfg = loadGitHubConfig();
   if (!cfg.token || !cfg.repo) {
@@ -1806,7 +1821,15 @@ async function pushToGitHub() {
       notify('Excel subido a GitHub correctamente');
     } else {
       const err = await response.json();
-      notify('Error: ' + (err.message || 'No se pudo subir'));
+      if (response.status === 401 || response.status === 403) {
+        notify('Error de autenticación. Revisa tu token.');
+        showGitHubConfig();
+      } else if (response.status === 404) {
+        notify('Repositorio no encontrado. Revisa la configuración.');
+        showGitHubConfig();
+      } else {
+        notify('Error: ' + (err.message || 'No se pudo subir'));
+      }
       console.error(err);
     }
   } catch(e) {
@@ -1834,7 +1857,11 @@ async function pullFromGitHub() {
 
     if (!response.ok) {
       if (response.status === 404) {
-        notify('Archivo no encontrado en GitHub');
+        notify('Archivo no encontrado en GitHub. Revisa nombre y rama.');
+        showGitHubConfig();
+      } else if (response.status === 401 || response.status === 403) {
+        notify('Error de autenticación. Revisa tu token.');
+        showGitHubConfig();
       } else {
         const err = await response.json();
         notify('Error: ' + (err.message || 'No se pudo descargar'));
